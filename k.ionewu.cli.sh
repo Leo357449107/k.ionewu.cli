@@ -29,12 +29,16 @@ fi
 unset GETOPKG
 unset GETCURL
 
+if [ ! -z "$3" ]; then
+	if [ "$3" = "connected" ]; then
+		NETMAC=$4
+	else
+		echo not connected
+		exit 0
+	fi
+fi
 echo set uid $UUID 
 echo set openid $OPENID
-
-cd /tmp
-mkdir dapengjiasu
-cd dapengjiasu
 
 CURLRE=""
 SETNET=""
@@ -54,6 +58,7 @@ chk_re(){
 		cat post.json
 		echo ret
 		cat re.json
+		rm lock
 		exit 1
 	fi
 }
@@ -65,30 +70,32 @@ URL4="https://kdts.ionewu.com/c/status"
 URL5="https://kdts.ionewu.com/c/open"
 
 chknet(){
-	NETLIST=`ifconfig | grep mtu | grep flag | awk -F':\ flag' '{print $1}'`
-	IFACE=`ip -4 addr | awk '{if ($1 ~ /inet/ && $NF ~ /^[ve]/) {a=$NF}} END{print a}'`
-	if [ -z "${NETLIST}" ]; then
-		NETLIST="$NETLISTDFT"
-	fi
-
-	for netdev in ${NETLIST}
-	do
-		NETSTAT=`ifconfig $netdev`
-		if [ ! -z "$NETSTAT" ]; then
-			echo "find $netdev"
-			NETSTAT=`ifconfig $netdev | grep inet | grep 127.0.0`
-			if [ -z "$NETSTAT" ]; then
-				PINGDAT=`ping -c 2 -I $netdev $IPV4URL | grep ttl`
-				if [ "$netdev" = "$IFACE" ]; then
-					NETMAC=$netdev
-				fi
-				if [ ! -z "$PINGDAT" ]; then
-					NETMAC=$netdev
-					break
+	if [ -z "$NETMAC" ]; then
+		NETLIST=`ifconfig | grep mtu | grep flag | awk -F':\ flag' '{print $1}'`
+		IFACE=`ip -4 addr | awk '{if ($1 ~ /inet/ && $NF ~ /^[ve]/) {a=$NF}} END{print a}'`
+		if [ -z "${NETLIST}" ]; then
+			NETLIST="$NETLISTDFT"
+		fi
+	
+		for netdev in ${NETLIST}
+		do
+			NETSTAT=`ifconfig $netdev`
+			if [ ! -z "$NETSTAT" ]; then
+				echo "find $netdev"
+				NETSTAT=`ifconfig $netdev | grep inet | grep 127.0.0`
+				if [ -z "$NETSTAT" ]; then
+					PINGDAT=`ping -c 2 -I $netdev $IPV4URL | grep ttl`
+					if [ "$netdev" = "$IFACE" ]; then
+						NETMAC=$netdev
+					fi
+					if [ ! -z "$PINGDAT" ]; then
+						NETMAC=$netdev
+						break
+					fi
 				fi
 			fi
-		fi
-	done
+		done
+	fi
 	echo "find netdev $NETMAC"
 	if [ ! -z "$NETMAC" ]; then
 		SETNET=" --interface $NETMAC"
@@ -97,6 +104,17 @@ chknet(){
 
 chknet
 echo $NETMAC
+
+cd /tmp
+mkdir dapengjiasu_$NETMAC
+cd dapengjiasu_$NETMAC
+if [ -f "lock" ]; then
+        echo in prg
+        exit 0
+fi
+
+
+touch lock
 
 curl $SETNET "https://c.ionewu.com/user/devs?uid=${UUID}&openid=${OPENID}"
 
@@ -287,7 +305,7 @@ mv re.json re11.json
 echo done
 
 cd ..
-rm -r dapengjiasu
+rm -r dapengjiasu_$NETMAC
 
 exit 0
 

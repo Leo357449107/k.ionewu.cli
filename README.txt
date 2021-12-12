@@ -1,21 +1,28 @@
 # k.ionewu.cli
-å¤§é¹åŠ é€ŸOpenwrtè„šæœ¬  
-ä¾èµ–:  
-        jshn curl ca-certificatesæˆ–è€…ca-bundle  
-ä½¿ç”¨:  
-        bash k.ionewu.cli.sh "UID" "OPENID"  
-è¯´æ˜Ž:  
+´óÅô¼ÓËÙOpenwrt½Å±¾  
+ÒÀÀµ:  
+        jshn curl ca-certificates»òÕßca-bundle  
+Ê¹ÓÃ:  
+		ÃüÁîÐÐ
+¡¡¡¡        sh k.ionewu.cli.sh "UID" "OPENID"  
+¡¡¡¡
+		mwan3Í¨Öª
+			/etc/mwan3.user sh k.ionewu.cli.sh "UID" "OPENID" $ACTION $DEVICE
+
+ËµÃ÷:  
   
-	ï¼šè„šæœ¬ä¼šä¾æ¬¡æŒ‰ç…§NETLISTDFTçš„é¡ºåºæ£€æŸ¥æŽ¥å£èƒ½ä¸èƒ½è¿žä¸ŠIPV4URLï¼Œç„¶åŽä½¿ç”¨æ‰¾åˆ°çš„ç¬¬ä¸€ä¸ªæŽ¥å£è¿›è¡Œå¤„ç†ã€‚
-		å¦‚æžœæ²¡æœ‰æ‰¾åˆ°å°†ä½¿ç”¨ç³»ç»Ÿé»˜è®¤è·¯ç”±ã€‚
+	£º½Å±¾»áÒÀ´Î°´ÕÕNETLISTDFTµÄË³Ðò¼ì²é½Ó¿ÚÄÜ²»ÄÜÁ¬ÉÏIPV4URL£¬È»ºóÊ¹ÓÃÕÒµ½µÄµÚÒ»¸ö½Ó¿Ú½øÐÐ´¦Àí¡£
+		Èç¹ûÃ»ÓÐÕÒµ½½«Ê¹ÓÃÏµÍ³Ä¬ÈÏÂ·ÓÉ¡£
 
-	ï¼šUIDï¼ŒOPENIDè¯·åœ¨ç½‘é¡µç«¯æ‰«ç ç™»é™†åŽæŠ“åŒ…èŽ·å¾—ã€‚  
+	£ºUID£¬OPENIDÇëÔÚÍøÒ³¶ËÉ¨ÂëµÇÂ½ºó×¥°ü»ñµÃ¡£  
 
-	ï¼šæˆ‘åªæµ‹è¿‡å››å·ç”µä¿¡  
+£º¿ÉÒÔÌí¼Óµ½mwan3Í¨ÖªÀïÏìÓ¦½Ó¿ÚÉÏÏß£¬Ê¹ÓÃmwan3Ìá¹©½Ó¿ÚÁ¬½Ó£¬Ö»ÏìÓ¦¸ú×Ù³É¹¦(connected)¡£
 
-	ï¼šç†è®ºä¸Šåªæ”¯æŒOpenwrt  
+	£ºÎÒÖ»²â¹ýËÄ´¨µçÐÅ  
 
-	ï¼šæˆ‘åœ¨openwrtçš„vié‡Œé¢å†™çš„ï¼Œå†™çš„ä¸‘ï¼Œä¸çˆ±è¯·Alt+F4  
+	£ºÀíÂÛÉÏÖ»Ö§³ÖOpenwrt  
+
+	£ºÎÒÔÚopenwrtµÄviÀïÃæÐ´µÄ£¬Ð´µÄ³ó£¬²»°®ÇëAlt+F4  
 
 TODO:  
-	è¿‡å‡ å¤©å†™æˆPackageï¼ˆæˆ‘è§‰å¾—æˆ‘ä¸ä¼šåšçš„ï¼‰ã€‚  
+	¹ý¼¸ÌìÐ´³ÉPackage£¨ÎÒ¾õµÃÎÒ²»»á×öµÄ£©¡£  
