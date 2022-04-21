@@ -59,6 +59,7 @@ chk_re(){
 		echo ret
 		cat re.json
 		rm lock
+		logger -p ERROR "k.ionewu failed $NETMAC"
 		exit 1
 	fi
 }
@@ -115,7 +116,7 @@ fi
 
 
 touch lock
-
+logger -p INFO "k.ionewu start ${NETMAC}"
 curl $SETNET "https://c.ionewu.com/user/devs?uid=${UUID}&openid=${OPENID}"
 
 #1
@@ -306,6 +307,6 @@ echo done
 
 cd ..
 rm -r dapengjiasu_$NETMAC
-
+logger -p INFO "k.ionewu done $NETMAC"
 exit 0
 
